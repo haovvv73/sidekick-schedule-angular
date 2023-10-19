@@ -1,1 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html,body{
+        @apply font-SFpro;
+        @apply box-border;
+        @apply m-0;
+        @apply h-full
+    }
+}
+
+@layer components{
+    .window{
+        @apply overflow-hidden rounded-xl h-5/6 w-11/12 flex items-center scale-0 duration-300;
+    }
+    .windowNotab{
+        @apply overflow-hidden rounded-xl h-5/6 w-11/12 scale-0 duration-300;
+    }
+    .windowTab{
+        @apply bg-white/80 backdrop-blur-md h-full w-[300px];
+    }
+    .windowDisplay{
+        @apply bg-white h-full w-full
+    }
+}

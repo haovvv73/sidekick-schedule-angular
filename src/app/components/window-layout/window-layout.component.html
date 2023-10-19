@@ -1,0 +1,25 @@
+<div class="w-full h-full justify-center flex pt-3" cdkDrag>
+    <div id="homeComponent" class="window" [ngClass]="{'scale-100':animation}" >
+        
+        <div class="windowTab p-2 space-y-3">
+            <div class="w-full flex items-center space-x-2 px-2 py-1 ">
+                <img src="../../../assets/images/icons/dot-red.png" 
+                class="h-4 w-4 cursor-pointer redClose"
+                routerLink="/">
+
+                <img src="../../../assets/images/icons/dot-yellow.png" 
+                class="h-4 w-4 cursor-pointer yellowResize"
+                routerLink="/">
+
+                <img src="../../../assets/images/icons/dot-green.png" 
+                class="h-4 w-4 cursor-pointer greenMiniSize"
+                routerLink="/">
+            </div>
+            <ng-content select="[windowTab]" ></ng-content>
+        </div>
+
+        <div class="windowDisplay">
+            <ng-content select="[windowDisplay]"></ng-content>
+        </div>
+    </div>
+</div>

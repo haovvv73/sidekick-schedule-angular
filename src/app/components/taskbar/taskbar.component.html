@@ -1,0 +1,17 @@
+<div class="h-16 absolute bottom-2 left-0 right-0 flex items-center justify-center">
+    <div 
+        matTooltip={{toolTipTaskBar}}
+        matTooltipPosition="right"
+        class="flex items-center bg-white/40 backdrop-blur-md rounded-xl shadow-md w-auto "
+    >
+        <a
+            *ngFor="let task of tasks" 
+            routerLink={{task.link}}
+            class="relative h-16 w-16 hover:mx-4 duration-200"
+        >
+            <img src={{task.img}} 
+            (mouseenter)="onToolTip(task.label)"
+            class="absolute left-0 bottom-0 hover:bottom-4 hover:scale-150 duration-200" >
+        </a>
+    </div>
+</div>

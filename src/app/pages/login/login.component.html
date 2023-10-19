@@ -1,0 +1,59 @@
+<div class="bg-laptop-background-light h-full bg-cover bg-no-repeat">
+    <div class="h-full bg-black/30 backdrop-blur-sm flex justify-center items-center">
+        <div class="p-1 overflow-hidden h-fit w-[300px] space-y-3">
+
+            <div class="text-center text-amber-50" >
+                <h1 class="text-3xl" >Welcome</h1>
+            </div>
+            
+            <form class="space-y-3" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <div>
+                    <input 
+                    type="text" 
+                    class="bg-white/40 text-amber-50 placeholder-black/50 rounded-md w-full h-10 p-2 outline-none" 
+                    formControlName="email"
+                    placeholder="Enter Email">
+                    <div *ngIf="email && email.invalid && (email.touched || email.dirty)" >
+                        <span *ngIf="email.errors?.['required']" class="text-rose-500"> Email is required </span>
+                        <span *ngIf="email.errors?.['email']" class="text-rose-500"> Invalid email format </span> 
+                    </div>
+                </div>
+                <div>
+                    <input 
+                    type="password" 
+                    formControlName="password"
+                    class="bg-white/40 text-amber-50 placeholder-black/50 rounded-md w-full h-10 p-2 outline-none" 
+                    placeholder="Enter Password">
+                    <div *ngIf="password && password.invalid && (password.touched || password.dirty)" >
+                        <span *ngIf="password.errors?.['required']" class="text-rose-500"> Password is required </span>
+                        <span *ngIf="password.errors?.['minlength']" class="text-rose-500" > Password must be at least 6 characters</span> 
+                    </div>
+                </div>
+                <div>
+                    <button type="submit" 
+                    class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 
+                    shadow-md text-amber-50 rounded-md w-full h-10 p-2"
+                    >
+                        Login   
+                    </button>
+                </div>
+            </form>
+
+            <div class="flex items-center text-amber-50">
+                <span class="border h-[1px] flex-1 border-white " ></span>
+                <span class="mx-1" >or</span>
+                <span class="border h-[1px] flex-1 border-white " ></span>
+            </div>
+
+            <div class="flex justify-center" >
+                <button mat-mini-fab color="primary" >
+                    <mat-icon>facebook</mat-icon>
+                </button>
+            </div>
+
+            <div class="text-center text-white/80" >
+                <p>Don't have an account ? <a routerLink="/register" class="text-amber-50 hover:underline cursor-pointer" >create</a> </p>
+            </div>
+        </div>
+    </div>
+</div>
