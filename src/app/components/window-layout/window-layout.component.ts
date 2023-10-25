@@ -9,7 +9,9 @@ export class WindowLayoutComponent implements AfterViewInit {
   animation : boolean = false
 
   ngAfterViewInit(): void {
-    this.onAnimationComponent()
+    setTimeout(()=>{
+      this.onAnimationComponent()
+    },0)
   }
 
   onAnimationComponent(){

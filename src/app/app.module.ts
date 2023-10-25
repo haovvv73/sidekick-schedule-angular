@@ -31,6 +31,11 @@ import { RegisterComponent } from './pages/register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WindowNoTabLayoutComponent } from './components/window-no-tab-layout/window-no-tab-layout.component';
 import { AnalyzeComponent } from './pages/analyze/analyze.component';
+import {MatGridListModule} from '@angular/material/grid-list';
+import { DynamicViewTableComponent } from './components/dynamic-view-table/dynamic-view-table.component';
+import {MatTableModule} from '@angular/material/table';
+import { DialogOneFieldComponent } from './components/dialog-one-field/dialog-one-field.component';
+import { AnalyzeDetailComponent } from './pages/analyze-detail/analyze-detail.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +56,9 @@ import { AnalyzeComponent } from './pages/analyze/analyze.component';
     RegisterComponent,
     WindowNoTabLayoutComponent,
     AnalyzeComponent,
+    DynamicViewTableComponent,
+    DialogOneFieldComponent,
+    AnalyzeDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,7 +75,9 @@ import { AnalyzeComponent } from './pages/analyze/analyze.component';
     MatInputModule,
     MatFormFieldModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatGridListModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

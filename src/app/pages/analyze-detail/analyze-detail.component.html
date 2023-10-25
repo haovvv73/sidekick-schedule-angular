@@ -1,0 +1,74 @@
+<app-window-no-tab-layout>
+    <div
+        windowDisplay
+        *ngIf="true"
+        class="h-full p-4 overflow-y-auto"
+    >   
+    <!-- header toolbar -->
+        <div >
+            <div class="flex items-center" >
+                <button class="flex h-full" ><mat-icon class="text-base" >arrow_back_ios_new</mat-icon></button>
+                <span class="text-lg ml-4 font-semibold" >{{fileName}}</span>
+            </div> 
+
+            <div class="rounded-sm p-2 bg-gray-100 mt-5 flex items-center justify-between" >
+                <div *ngIf="false" class="flex space-x-5" >
+                    <div>
+                        <p>Table: student</p>
+                        <p>Amount: 12</p>
+                    </div>
+                    <div>
+                        <p> GPA: 8.0 </p>
+                    </div>
+                </div>
+
+                <div *ngIf="true" class="flex items-center space-x-5" >
+                    <div>
+                        <p>Table: teacher</p>
+                        <p>Amount: 12</p>
+                    </div>
+                    <div>
+                        <p> Pass: 90% </p>
+                        <p> Fail: 10% </p>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-2" >
+                    <button class="flex h-full" ><mat-icon class="text-xl" >add</mat-icon></button>
+                    <button class="flex h-full" ><mat-icon class="text-xl" >edit</mat-icon></button>
+                    <button class="flex h-full" ><mat-icon class="text-xl" >delete</mat-icon></button>
+                    <button class="pl-4 bg-white rounded-lg border shadow-sm flex " > 
+                        import <mat-icon class="text-base" >arrow_drop_down</mat-icon></button>
+                    <button class="pl-4 bg-sky-500 rounded-lg border text-white shadow-sm flex " > 
+                        export <mat-icon class="text-base" >arrow_drop_up</mat-icon></button>
+                </div>
+            </div>
+        </div>
+
+    <!-- table data view -->
+        <div class="bg-gray-100 px-[1px]">
+            <app-dynamic-view-table></app-dynamic-view-table>
+        </div>
+    </div>
+
+    <!-- setting type table manual -->
+    <div
+        windowDisplay
+        *ngIf="false"
+        class="h-full flex items-center justify-center"
+    >   
+        <div class="p-2 rounded-lg bg-black/10 w-[500px] space-y-3" >
+            <p class="text-lg font-semibold" > {{fileName}} </p>
+            <p class="ml-2" > Pick Your Type Table </p>
+            <div class="flex items-center space-x-2 ml-2" >
+                <button class="px-6 bg-gray-100 hover:bg-sky-500 rounded-lg border shadow-sm" > Student </button>
+                <button class="px-6 bg-gray-100 hover:bg-sky-500 rounded-lg border shadow-sm" > Teacher </button>
+            </div>
+            <div class="ml-2" >
+                <p>*Student is for student who want analyze and list yours point  </p>
+                <p>*Teacher is for teacher who want analyze and list yours student point  </p>
+            </div>
+            <p class="text-red-500 mt-3" >can't change type table after choose</p>
+        </div>
+    </div>
+</app-window-no-tab-layout>

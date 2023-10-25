@@ -1,12 +1,18 @@
 import { Component } from '@angular/core';
 
+interface itemTaskbar{
+  label: string,
+  img:string,
+  link:string
+}
+
 @Component({
   selector: 'app-taskbar',
   templateUrl: './taskbar.component.html',
   styleUrls: ['./taskbar.component.css']
 })
 export class TaskbarComponent {
-  tasks = [
+  tasks : itemTaskbar[] = [
     {
       label : 'lesson schedule',
       img:'../../../assets/images/icons/lesson.png',

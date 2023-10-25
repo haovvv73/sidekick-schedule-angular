@@ -10,6 +10,7 @@ import { MainTemplateComponent } from './templates/main-template/main-template.c
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { AnalyzeComponent } from './pages/analyze/analyze.component';
+import { AnalyzeDetailComponent } from './pages/analyze-detail/analyze-detail.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,7 @@ const routes: Routes = [
       { path:'', component:HomeComponent},
       { path:'lessons',component:LessonsComponent},
       { path:'analyze', component:AnalyzeComponent },
+      { path:'analyze/:_id', component:AnalyzeDetailComponent },
       { path:'groups', component:GroupsComponent },
       { path:'events', component:EventsComponent },
       { path:'info',component:InfoComponent },

@@ -42,7 +42,7 @@ export class HeaderComponent implements OnDestroy, OnInit {
     }
   }
 
-  onListenerHeadbarChangeUI() {
+  onListenerHeadbarChangeUI():void {
     this.settingUISubscription = this.settingUI.headBar$.subscribe(
       next => {
         switch (next) {
@@ -61,11 +61,11 @@ export class HeaderComponent implements OnDestroy, OnInit {
     )
   }
 
-  onOpenAboutDialog() {
+  onOpenAboutDialog():void {
     this.dialog.open(ViewTableComponent)
   }
 
-  displayTimeAndDate() {
+  displayTimeAndDate():void {
     const currentDate = new Date();
 
     const weekday = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][currentDate.getDay()];
