@@ -7,8 +7,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { HomeComponent } from './pages/home/home.component';
-import { LessonsComponent } from './pages/lessons/lessons.component';
-import { GroupsComponent } from './pages/groups/groups.component';
 import { EventsComponent } from './pages/events/events.component';
 import { InfoComponent } from './pages/info/info.component';
 import { NotfoundComponent } from './pages/notfound/notfound.component';
@@ -16,7 +14,6 @@ import { HeaderComponent } from './components/header/header.component';
 import { MatIconModule } from '@angular/material/icon';
 import { ViewTableComponent } from './components/view-table/view-table.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatChipsModule } from '@angular/material/chips';
 import { TaskbarComponent } from './components/taskbar/taskbar.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { SettingUIComponent } from './components/setting-ui/setting-ui.component';
@@ -31,18 +28,17 @@ import { RegisterComponent } from './pages/register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WindowNoTabLayoutComponent } from './components/window-no-tab-layout/window-no-tab-layout.component';
 import { AnalyzeComponent } from './pages/analyze/analyze.component';
-import {MatGridListModule} from '@angular/material/grid-list';
-import { DynamicViewTableComponent } from './components/dynamic-view-table/dynamic-view-table.component';
-import {MatTableModule} from '@angular/material/table';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatTableModule } from '@angular/material/table';
 import { DialogOneFieldComponent } from './components/dialog-one-field/dialog-one-field.component';
 import { AnalyzeDetailComponent } from './pages/analyze-detail/analyze-detail.component';
+import { ContactComponent } from './pages/contact/contact.component';
+import { ScheduleComponent } from './pages/schedule/schedule.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    LessonsComponent,
-    GroupsComponent,
     EventsComponent,
     InfoComponent,
     NotfoundComponent,
@@ -56,9 +52,10 @@ import { AnalyzeDetailComponent } from './pages/analyze-detail/analyze-detail.co
     RegisterComponent,
     WindowNoTabLayoutComponent,
     AnalyzeComponent,
-    DynamicViewTableComponent,
     DialogOneFieldComponent,
     AnalyzeDetailComponent,
+    ContactComponent,
+    ScheduleComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,7 +65,6 @@ import { AnalyzeDetailComponent } from './pages/analyze-detail/analyze-detail.co
     MatButtonModule,
     MatIconModule,
     MatDialogModule,
-    MatChipsModule,
     MatTooltipModule,
     CdkDrag,
     MatSelectModule,

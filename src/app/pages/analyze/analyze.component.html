@@ -7,7 +7,7 @@
         <button 
         (click)="onViewAllFolder()"
         class="group flex items-center w-full space-x-1 hover:bg-black/10 py-1 px-2 rounded-md" >
-            <mat-icon class="text-sky-500" >bookmark_border</mat-icon>
+            <mat-icon class="text-sky-600" >bookmark_border</mat-icon>
             <span class="text-gray-800" >All File</span>
         </button>
 
@@ -16,24 +16,25 @@
             <button class="text-gray-500 px-2 flex" (click)="onCreateFolder()"><mat-icon>add</mat-icon></button>
         </div>
 
+        <!-- folder -->
         <button 
             *ngFor="let item of folder" 
             (click)="onViewFolder(item)"
-            class="flex items-center w-full space-x-1 hover:bg-black/10 py-1 px-2 rounded-md" 
+            class="flex items-center w-full space-x-3 hover:bg-black/10 py-1 px-2 rounded-md" 
         >
-            <mat-icon class="text-sky-500" >folder_open</mat-icon>
+            <mat-icon class="text-sky-600" >folder_open</mat-icon>
             <span class="text-gray-800" >{{item.nameFolder}}</span>
         </button>
 
     </div>
     
-    <!-- right-folder -->
+    <!-- right -->
     <div 
         windowDisplay 
-        class="overflow-y-auto h-full"
+        class="overflow-y-auto h-full bg-gray-50"
     >
         <!-- header bar window -->
-        <div class="flex items-center justify-between px-4 py-3 border-b bg-gray-50" >
+        <div class="flex items-center justify-between px-4 py-3 border-b bg-gray-50 shadow-sm" >
             
             <div class="flex items-center space-x-2" >
                 <p class="text-xl" >{{currentFolder}}</p>
@@ -55,10 +56,10 @@
         <div class="p-2 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7 gap-2">
             <div 
             *ngFor="let item of currentFiles"
-            [routerLink]="['/analyze',item]"
-            class="rounded-2xl h-[100px] p-2 bg-gradient-to-b from-sky-400 to-blue-400 flex flex-col cursor-pointer" >
+            [routerLink]="['/analyze',item.ID]"
+            class="rounded-xl h-[100px] p-2 bg-gradient-to-b from-sky-400 to-blue-400 flex flex-col cursor-pointer" >
                 <mat-icon class="text-white" >attach_file</mat-icon>
-                <p class="text-white mt-auto line-clamp-2" >{{item}}</p>
+                <p class="text-white mt-auto line-clamp-2" >{{item.fileName}}</p>
             </div>
         </div>
 

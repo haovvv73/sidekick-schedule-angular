@@ -14,23 +14,23 @@ interface itemTaskbar{
 export class TaskbarComponent {
   tasks : itemTaskbar[] = [
     {
-      label : 'lesson schedule',
+      label : 'schedule',
       img:'../../../assets/images/icons/lesson.png',
-      link:'lessons'
+      link:'schedule'
     },
     {
-      label : 'teacher list',
+      label : 'analyze',
       img:'../../../assets/images/icons/analyze.png',
       link:'analyze'
     },
     {
-      label : 'groups info',
+      label : 'groups',
       img:'../../../assets/images/icons/group.png',
-      link:'groups'
+      link:'contact'
     },
     {
-      label : 'events schedule',
-      img:'https://www.frontend.fyi/playground-assets/macos-dock/icons/calendar.png',
+      label : 'events',
+      img:'../../../assets/images/icons/calendar.png',
       link:'events'
     },
   ]

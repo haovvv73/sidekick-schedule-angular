@@ -1,74 +1,154 @@
 <app-window-no-tab-layout>
-    <div
-        windowDisplay
-        *ngIf="true"
-        class="h-full p-4 overflow-y-auto"
-    >   
-    <!-- header toolbar -->
-        <div >
-            <div class="flex items-center" >
-                <button class="flex h-full" ><mat-icon class="text-base" >arrow_back_ios_new</mat-icon></button>
-                <span class="text-lg ml-4 font-semibold" >{{fileName}}</span>
-            </div> 
+    <div windowDisplay *ngIf="currentFile?.statusFile !== null" class="h-full p-4 overflow-y-auto">
+        <!-- header toolbar -->
+        <div>
+            <div class="flex items-center">
+                <a class="flex h-full" routerLink="/analyze"><mat-icon
+                        class="text-base">arrow_back_ios_new</mat-icon></a>
+                <span class="text-lg ml-4 font-semibold">{{currentFile?.nameFile}}</span>
+            </div>
 
-            <div class="rounded-sm p-2 bg-gray-100 mt-5 flex items-center justify-between" >
-                <div *ngIf="false" class="flex space-x-5" >
+            <div class="rounded-sm p-2 bg-gray-100 mt-5 flex items-center justify-between">
+                <div class="flex space-x-5">
                     <div>
-                        <p>Table: student</p>
+                        <p>Table: {{currentFile?.statusFile}}</p>
                         <p>Amount: 12</p>
                     </div>
-                    <div>
+                    <div *ngIf="currentFile?.statusFile === 'lesson'">
                         <p> GPA: 8.0 </p>
                     </div>
-                </div>
-
-                <div *ngIf="true" class="flex items-center space-x-5" >
-                    <div>
-                        <p>Table: teacher</p>
-                        <p>Amount: 12</p>
-                    </div>
-                    <div>
+                    <div *ngIf="currentFile?.statusFile === 'member'">
                         <p> Pass: 90% </p>
                         <p> Fail: 10% </p>
                     </div>
                 </div>
 
-                <div class="flex items-center space-x-2" >
-                    <button class="flex h-full" ><mat-icon class="text-xl" >add</mat-icon></button>
-                    <button class="flex h-full" ><mat-icon class="text-xl" >edit</mat-icon></button>
-                    <button class="flex h-full" ><mat-icon class="text-xl" >delete</mat-icon></button>
-                    <button class="pl-4 bg-white rounded-lg border shadow-sm flex " > 
-                        import <mat-icon class="text-base" >arrow_drop_down</mat-icon></button>
-                    <button class="pl-4 bg-sky-500 rounded-lg border text-white shadow-sm flex " > 
-                        export <mat-icon class="text-base" >arrow_drop_up</mat-icon></button>
+                <div class="flex items-center space-x-2">
+                    <button class="flex h-full"><mat-icon class="text-xl">add</mat-icon></button>
+                    <button 
+                        (click)="onEditFileName()"
+                        class="flex h-full"><mat-icon class="text-xl">edit</mat-icon>
+                    </button>
+                    <button 
+                        (click)="onDeleteFileName()"
+                        class="flex h-full"><mat-icon class="text-xl">delete</mat-icon>
+                    </button>
+                    <button class="pl-4 bg-white rounded-lg border shadow-sm flex ">
+                        import <mat-icon class="text-base">arrow_drop_down</mat-icon></button>
+                    <button class="pl-4 bg-sky-500 rounded-lg border text-white shadow-sm flex ">
+                        export <mat-icon class="text-base">arrow_drop_up</mat-icon></button>
                 </div>
             </div>
         </div>
 
-    <!-- table data view -->
+        <!-- table data view -->
         <div class="bg-gray-100 px-[1px]">
-            <app-dynamic-view-table></app-dynamic-view-table>
+            <!-- lesson list table -->
+            <table 
+                *ngIf="currentFile?.statusFile === 'lesson'" 
+                mat-table [dataSource]="dataSourceLesson"
+                class="mat-elevation-z8 shadow-none">
+
+                <!-- ID Column -->
+                <ng-container matColumnDef="ID">
+                    <th mat-header-cell *matHeaderCellDef> ID </th>
+                    <td mat-cell *matCellDef="let element"> {{element.ID}} </td>
+                </ng-container>
+
+                <!-- nameStudent Column -->
+                <ng-container matColumnDef="nameLesson">
+                    <th mat-header-cell *matHeaderCellDef> Name </th>
+                    <td mat-cell *matCellDef="let element"> {{element.nameLesson}} </td>
+                </ng-container>
+
+                <!-- indexLesson Column -->
+                <ng-container matColumnDef="indexLesson">
+                    <th mat-header-cell *matHeaderCellDef> index </th>
+                    <td mat-cell *matCellDef="let element"> {{element.indexLesson}} </td>
+                </ng-container>
+
+                <!-- score Column -->
+                <ng-container matColumnDef="score">
+                    <th mat-header-cell *matHeaderCellDef> score </th>
+                    <td mat-cell *matCellDef="let element"> {{element.score}} </td>
+                </ng-container>
+
+                <!-- action Column -->
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef> action </th>
+                    <td mat-cell *matCellDef="let element"> 
+                        <div class="flex items-center space-x-2" >
+                            <button class="flex h-full"><mat-icon class="text-xl text-sky-500">edit</mat-icon></button>
+                            <button class="flex h-full"><mat-icon class="text-xl text-red-500">delete</mat-icon></button>
+                        </div>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumnsLesson"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumnsLesson;"></tr>
+            </table>
+
+            <!-- member list table  -->
+            <table 
+                *ngIf="currentFile?.statusFile === 'member'" 
+                mat-table [dataSource]="dataSourceStudent"
+                class="mat-elevation-z8 shadow-none"
+            >
+
+                <!-- ID Column -->
+                <ng-container matColumnDef="ID">
+                    <th mat-header-cell *matHeaderCellDef> ID </th>
+                    <td mat-cell *matCellDef="let element"> {{element.ID}} </td>
+                </ng-container>
+
+                <!-- nameStudent Column -->
+                <ng-container matColumnDef="nameStudent">
+                    <th mat-header-cell *matHeaderCellDef> Name </th>
+                    <td mat-cell *matCellDef="let element"> {{element.nameStudent}} </td>
+                </ng-container>
+
+                <!-- score Column -->
+                <ng-container matColumnDef="score">
+                    <th mat-header-cell *matHeaderCellDef> score </th>
+                    <td mat-cell *matCellDef="let element"> {{element.score}} </td>
+                </ng-container>
+
+                <!-- action Column -->
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef> action </th>
+                    <td mat-cell *matCellDef="let element"> 
+                        <div class="flex items-center space-x-2" >
+                            <button class="flex h-full"><mat-icon class="text-xl text-sky-500">edit</mat-icon></button>
+                            <button class="flex h-full"><mat-icon class="text-xl text-red-500">delete</mat-icon></button>
+                        </div>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumnsStudent"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumnsStudent;"></tr>
+            </table>
         </div>
     </div>
 
-    <!-- setting type table manual -->
-    <div
-        windowDisplay
-        *ngIf="false"
-        class="h-full flex items-center justify-center"
-    >   
-        <div class="p-2 rounded-lg bg-black/10 w-[500px] space-y-3" >
-            <p class="text-lg font-semibold" > {{fileName}} </p>
-            <p class="ml-2" > Pick Your Type Table </p>
-            <div class="flex items-center space-x-2 ml-2" >
-                <button class="px-6 bg-gray-100 hover:bg-sky-500 rounded-lg border shadow-sm" > Student </button>
-                <button class="px-6 bg-gray-100 hover:bg-sky-500 rounded-lg border shadow-sm" > Teacher </button>
+    <!-- setting type table manual on first visit -->
+    <div windowDisplay *ngIf="currentFile?.statusFile === null" class="h-full flex items-center justify-center">
+        <div class="p-2 rounded-lg bg-black/10 w-[500px] space-y-3">
+            <p class="text-lg font-semibold flex items-center">
+                <a class="flex h-full" routerLink="/analyze"><mat-icon
+                        class="text-base">arrow_back_ios_new</mat-icon></a>
+                {{currentFile?.nameFile}}
+            </p>
+            <p class="ml-2"> Pick Your type Table: </p>
+            <div class="flex items-center space-x-2 ml-2">
+                <button *ngFor="let item of statusFileButton" (click)="onSetStatusFile(item.status)"
+                    class="px-6 bg-gray-100 hover:bg-sky-500 rounded-lg border shadow-sm"> {{item.label}} </button>
             </div>
-            <div class="ml-2" >
-                <p>*Student is for student who want analyze and list yours point  </p>
-                <p>*Teacher is for teacher who want analyze and list yours student point  </p>
+            <div class="ml-2">
+                <p *ngFor="let item of statusFileButton">
+                    {{item.description}}
+                </p>
             </div>
-            <p class="text-red-500 mt-3" >can't change type table after choose</p>
+            <p class="text-red-500 mt-3">can't change type table after choose</p>
         </div>
     </div>
 </app-window-no-tab-layout>

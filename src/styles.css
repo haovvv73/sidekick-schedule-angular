@@ -19,10 +19,11 @@
     .windowNotab{
         @apply overflow-hidden rounded-xl h-5/6 w-11/12 scale-0 duration-300;
     }
-    .windowTab{
+    
+    .window-tab{
         @apply bg-white/80 backdrop-blur-md h-full w-[300px];
     }
-    .windowDisplay{
+    .window-display{
         @apply bg-white h-full w-full
     }
 }

@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
-import { LessonsComponent } from './pages/lessons/lessons.component';
-import { GroupsComponent } from './pages/groups/groups.component';
 import { EventsComponent } from './pages/events/events.component';
 import { InfoComponent } from './pages/info/info.component';
 import { NotfoundComponent } from './pages/notfound/notfound.component';
@@ -11,6 +9,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { AnalyzeComponent } from './pages/analyze/analyze.component';
 import { AnalyzeDetailComponent } from './pages/analyze-detail/analyze-detail.component';
+import { ScheduleComponent } from './pages/schedule/schedule.component';
+import { ContactComponent } from './pages/contact/contact.component';
 
 const routes: Routes = [
   {
@@ -25,10 +25,10 @@ const routes: Routes = [
     path: '', 
     children:[ 
       { path:'', component:HomeComponent},
-      { path:'lessons',component:LessonsComponent},
+      { path:'schedule',component:ScheduleComponent},
       { path:'analyze', component:AnalyzeComponent },
       { path:'analyze/:_id', component:AnalyzeDetailComponent },
-      { path:'groups', component:GroupsComponent },
+      { path:'contact', component:ContactComponent },
       { path:'events', component:EventsComponent },
       { path:'info',component:InfoComponent },
     ],

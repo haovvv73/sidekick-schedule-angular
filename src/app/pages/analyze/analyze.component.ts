@@ -1,11 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogOneFieldComponent } from 'src/app/components/dialog-one-field/dialog-one-field.component';
-
-interface Folder{
-  nameFolder : string,
-  files:string[]
-}
+import { FileInterface, Folder } from 'src/app/models/folder/folder.model';
 
 @Component({
   selector: 'app-analyze',
@@ -15,32 +11,36 @@ interface Folder{
 export class AnalyzeComponent {
 
   currentFolder = ''
-  currentFiles: string[] = []
+  currentFiles: FileInterface[] = []
 
   folder : Folder[] = [
     {
-      nameFolder:'Schedule',
+      ID:1,
+      nameFolder:'Score HK1 2023',
       files:[
-        'schedule 1',
-        'schedule 2',
-        'schedule 3',
-        'schedule 4',
+        {
+          ID:1,
+          fileName:'Math'
+        },
+        {
+          ID:2,
+          fileName:'Biology'
+        },
+        
       ]
     },
     {
-      nameFolder:'lesson',
+      ID:2,
+      nameFolder:'Math Student List',
       files:[
-        'lesson 1',
-        'lesson 2',
-        'lesson 4',
-      ]
-    },
-    {
-      nameFolder:'semester',
-      files:[
-        'semester 1',
-        'semester 2',
-        'semester 3',
+        {
+          ID:3,
+          fileName:'Semi'
+        },
+        {
+          ID:4,
+          fileName:'Final'
+        },
       ]
     }
   ]
@@ -75,22 +75,29 @@ export class AnalyzeComponent {
   onCreateFolder(): void{  
     this.openDialog((nameFolder : string)=>{
       this.folder.push({
+        ID:99,
         nameFolder:nameFolder,
         files:[
-          'File 1'
+          {
+            ID:99,
+            fileName:'new folder'
+          },
         ]
       })
     })
   }
 
   onAddFile():void{
-    this.openDialog((nameFile : string)=>{
+    this.openDialog((fileName : string)=>{
       let length = this.folder.length
       for(let i = 0;i <length; i++ ){
         let item = this.folder[i]
         // find folder
         if(item.nameFolder === this.currentFolder){
-          item.files.push(nameFile)
+          item.files.push({
+            ID:99,
+            fileName
+          })
           break;
         }
       }
@@ -103,7 +110,7 @@ export class AnalyzeComponent {
   }
 
   onViewAllFolder():void{
-    let allFiles : string[] = []
+    let allFiles : FileInterface[] = []
     this.folder.map(item=>{
       allFiles.push(...item.files)
     })
