@@ -1,4 +1,86 @@
 <app-window-layout>
-    <p windowDisplay >hello event</p>
-    <p windowTab > hello tab </p>
+    <!-- left -->
+    <div windowTab class="flex flex-col-reverse h-full">
+        <div class="flex-1 overflow-auto mt-2 mb-9">
+            <span class="text-gray-500 px-2">Events</span>
+            <div *ngFor="let item of events; trackBy: trackByFn" class="hover:bg-black/10 rounded-md flex items-center overflow-hidden">
+                <!-- read event -->
+                <button (click)="onReadEventClick(item.id)" class="flex items-center w-full space-x-3 py-1 px-2">
+                    <i *ngIf="!isAfterDate(item.end)" class="fa fa-exclamation-circle text-[12px] text-red-500"></i>
+                    <i *ngIf="isAfterDate(item.end)" class="fa fa-genderless text-green-500"></i>
+                    <span class="text-gray-800 ml-2 line-clamp-1">{{item.title}}</span>
+                </button>
+                <!-- delete event -->
+                <button (click)="onDeleteEventClick(item.id)" class="w-fit px-2 py-1">
+                    <i class="fa fa-trash-alt text-red-500 hover:text-red-700"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- event binding -->
+        <div class="bg-white h-[260px] rounded-md shadow-lg p-3" *ngIf="currentDate">
+            <form class="h-full flex flex-col" [formGroup]="eventDetailGroup" (ngSubmit)="onUpdateEventClick()">
+                <div class="space-y-2 flex-1 overflow-auto" >
+                    <div class="flex space-x-2 items-baseline">
+                        <div><i class="text-lg text-red-500 fa fa-calendar-alt"></i></div>
+                        <div class="flex-1">
+                            <p class="text-lg">{{currentDate}}</p>
+                        </div>
+                    </div>
+                    <!-- title -->
+                    <div>
+                        <input class="text-xl w-full pl-1 outline-none border rounded-lg shadow-sm " 
+                            formControlName="title" 
+                            (keydown)="unDisabledButtonUpdate()"
+                        />
+                        <mat-error class="text-sm" *ngIf="eventDetailGroup.get('title')?.hasError('required')"> Required value</mat-error>
+                    </div>
+                    <!-- description -->
+                    <div>
+                        <textarea 
+                            id="message" rows="2"
+                            class="block p-2.5 w-full text-gray-600 bg-gray-50 rounded-lg border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white outline-none"
+                            formControlName="description"
+                            (keydown)="unDisabledButtonUpdate()">
+                        </textarea>
+                        <mat-error class="text-sm" *ngIf="eventDetailGroup.get('description')?.hasError('required')">Required value</mat-error>
+                    </div>
+                </div>
+                <button mat-raised-button color="warn" [disabled]="buttonUpdateIsDisabled" class="w-full mt-2">
+                    <!-- <i class="fa fa-spinner text-black animate-spin"></i>  --> Update
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- right -->
+    <div windowDisplay class="p-5 w-full h-full overflow-auto relative">
+        <div *ngIf="createEventForm"
+            class="absolute flex items-center justify-center top-0 bottom-0 left-0 right-0 bg-black/20 z-50">
+            <div class="bg-white rounded-md h-fit w-[300px]">
+                <div class="w-fit ml-auto mr-2 mt-2">
+                    <button (click)="onHideCreateEventFormClick()"> <mat-icon color="warn">highlight_off</mat-icon>
+                    </button>
+                </div>
+                <form class="p-4 border-t space-y-2" [formGroup]="eventGroup" (ngSubmit)="onCreateEventClick()">
+                    <mat-form-field class="w-full">
+                        <mat-label>Event Name</mat-label>
+                        <input matInput formControlName="title">
+                        <mat-error *ngIf="eventGroup.get('title')?.hasError('required')">
+                            Event name is required</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="w-full">
+                        <mat-label>Description</mat-label>
+                        <textarea matInput formControlName="description"></textarea>
+                        <mat-error *ngIf="eventGroup.get('description')?.hasError('required')">
+                            Description is required</mat-error>
+                    </mat-form-field>
+
+                    <button mat-raised-button color="primary" class="w-full">New Event</button>
+                </form>
+            </div>
+        </div>
+        <full-calendar #calendar [options]="calendarOptions" class="w-full h-full"></full-calendar>
+    </div>
 </app-window-layout>

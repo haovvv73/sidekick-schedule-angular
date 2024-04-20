@@ -18,7 +18,7 @@ import { TaskbarComponent } from './components/taskbar/taskbar.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { SettingUIComponent } from './components/setting-ui/setting-ui.component';
 import { MainTemplateComponent } from './templates/main-template/main-template.component';
-import { CdkDrag } from '@angular/cdk/drag-drop';
+import { CdkDrag, CdkDragHandle } from '@angular/cdk/drag-drop';
 import { WindowLayoutComponent } from './components/window-layout/window-layout.component';
 import { LoginComponent } from './pages/login/login.component'
 import { MatSelectModule } from '@angular/material/select';
@@ -34,6 +34,10 @@ import { DialogOneFieldComponent } from './components/dialog-one-field/dialog-on
 import { AnalyzeDetailComponent } from './pages/analyze-detail/analyze-detail.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { ScheduleComponent } from './pages/schedule/schedule.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { ScheduleDetailComponent } from './pages/schedule-detail/schedule-detail.component';
+import {MatListModule} from '@angular/material/list';
+
 
 @NgModule({
   declarations: [
@@ -56,6 +60,7 @@ import { ScheduleComponent } from './pages/schedule/schedule.component';
     AnalyzeDetailComponent,
     ContactComponent,
     ScheduleComponent,
+    ScheduleDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,13 +72,16 @@ import { ScheduleComponent } from './pages/schedule/schedule.component';
     MatDialogModule,
     MatTooltipModule,
     CdkDrag,
+    CdkDragHandle,
     MatSelectModule,
     MatInputModule,
     MatFormFieldModule,
     FormsModule,
     ReactiveFormsModule,
     MatGridListModule,
-    MatTableModule
+    MatTableModule,
+    FullCalendarModule,
+    MatListModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

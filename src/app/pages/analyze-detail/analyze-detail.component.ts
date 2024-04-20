@@ -20,8 +20,8 @@ interface StatusFileButton {
 })
 export class AnalyzeDetailComponent implements OnInit {
   currentFile: File | undefined
-  displayedColumnsStudent: string[] = ['ID', 'nameStudent', 'score', 'action']
-  displayedColumnsLesson: string[] = ['ID', 'nameLesson', 'indexLesson', 'score', 'action']
+  displayedColumnsStudent: string[] = ['ID', 'studentName', 'score', 'action']
+  displayedColumnsLesson: string[] = ['ID', 'lessonName', 'indexLesson', 'score', 'action']
   dataSourceStudent: DataStudent[] = []
   dataSourceLesson: DataLesson[] = []
 
@@ -37,16 +37,15 @@ export class AnalyzeDetailComponent implements OnInit {
       description: '*member is for who want manager student/member',
     },
   ]
-
   files: File[] = [
     {
       ID: 1,
-      nameFile: 'Math',
+      fileName: 'Math',
       statusFile: null,
       data: [
         {
           ID: 'MTH20109',
-          nameLesson: 'Abstract Math',
+          lessonName: 'Abstract Math',
           indexLesson: 3,
           score: 8.5
         }
@@ -54,12 +53,12 @@ export class AnalyzeDetailComponent implements OnInit {
     },
     {
       ID: 2,
-      nameFile: 'Biology',
+      fileName: 'Biology',
       statusFile: statusFile.lesson,
       data: [
         {
           ID: 'MTH20108',
-          nameLesson: 'Abstract Biology',
+          lessonName: 'Abstract Biology',
           indexLesson: 2,
           score: 9.5
         }
@@ -68,24 +67,24 @@ export class AnalyzeDetailComponent implements OnInit {
     // ----
     {
       ID: 3,
-      nameFile: 'Semi',
+      fileName: 'Semi',
       statusFile: statusFile.member,
       data: [
         {
           ID: '20110184',
-          nameStudent: 'Vo Tran Gia Hao',
+          studentName: 'Vo Tran Gia Hao',
           score: 8.5
         }
       ]
     },
     {
       ID: 4,
-      nameFile: 'Final',
+      fileName: 'Final',
       statusFile: statusFile.member,
       data: [
         {
           ID: '20110184',
-          nameStudent: 'Vo Tran Gia Hao',
+          studentName: 'Vo Tran Gia Hao',
           score: 8.5
         }
       ]
@@ -167,8 +166,8 @@ export class AnalyzeDetailComponent implements OnInit {
     
     // update db
     if (!fileResullt) return
-    this.openDialogEditFileName(fileResullt.nameFile,(newFileName)=>{
-      fileResullt.nameFile = newFileName
+    this.openDialogEditFileName(fileResullt.fileName,(newFileName)=>{ 
+      fileResullt.fileName = newFileName
     })
     // update view
     this.getFile()
@@ -189,15 +188,8 @@ export class AnalyzeDetailComponent implements OnInit {
 
   }
 
-  onAddRecord() {
+  // less crud action
 
-  }
-
-  onEditRecord() {
-
-  }
-
-  onDeleteRecord() {
-
-  }
+  // member crud action
+  
 }

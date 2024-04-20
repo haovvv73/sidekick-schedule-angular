@@ -4,7 +4,7 @@ import { DataLesson } from "./dataLesson.model";
 
 export interface File{
     ID:number,
-    nameFile : string,
+    fileName : string,
     statusFile :statusFile | null,
     data: DataStudent[] | DataLesson[]
 }

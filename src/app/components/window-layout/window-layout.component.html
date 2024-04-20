@@ -1,15 +1,15 @@
 <div class="w-full h-full justify-center flex pt-3" cdkDrag>
     <div id="homeComponent" class="window" [ngClass]="{'scale-100':animation}" >
         
-        <div class="window-tab p-2 space-y-3 md:block hidden">
+        <div class="window-tab p-2 space-y-3 md:flex md:flex-col hidden">
             <div class="w-full flex items-center space-x-2 px-2 py-1 ">
                 <img src="../../../assets/images/icons/dot-red.png" 
                 class="h-4 w-4 cursor-pointer redClose"
                 routerLink="/">
 
                 <img src="../../../assets/images/icons/dot-yellow.png" 
-                class="h-4 w-4 cursor-pointer yellowResize"
-                routerLink="/">
+                class="h-4 w-4 cursor-move yellowResize"
+                cdkDragHandle>
 
                 <img src="../../../assets/images/icons/dot-green.png" 
                 class="h-4 w-4 cursor-pointer greenMiniSize"

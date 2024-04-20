@@ -11,6 +11,7 @@ import { AnalyzeComponent } from './pages/analyze/analyze.component';
 import { AnalyzeDetailComponent } from './pages/analyze-detail/analyze-detail.component';
 import { ScheduleComponent } from './pages/schedule/schedule.component';
 import { ContactComponent } from './pages/contact/contact.component';
+import { ScheduleDetailComponent } from './pages/schedule-detail/schedule-detail.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,7 @@ const routes: Routes = [
     children:[ 
       { path:'', component:HomeComponent},
       { path:'schedule',component:ScheduleComponent},
+      { path:'schedule/:_id', component:ScheduleDetailComponent },
       { path:'analyze', component:AnalyzeComponent },
       { path:'analyze/:_id', component:AnalyzeDetailComponent },
       { path:'contact', component:ContactComponent },

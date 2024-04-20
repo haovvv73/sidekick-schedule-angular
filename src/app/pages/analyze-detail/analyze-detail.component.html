@@ -5,7 +5,7 @@
             <div class="flex items-center">
                 <a class="flex h-full" routerLink="/analyze"><mat-icon
                         class="text-base">arrow_back_ios_new</mat-icon></a>
-                <span class="text-lg ml-4 font-semibold">{{currentFile?.nameFile}}</span>
+                <span class="text-lg ml-4 font-semibold">{{currentFile?.fileName}}</span>
             </div>
 
             <div class="rounded-sm p-2 bg-gray-100 mt-5 flex items-center justify-between">
@@ -55,10 +55,10 @@
                     <td mat-cell *matCellDef="let element"> {{element.ID}} </td>
                 </ng-container>
 
-                <!-- nameStudent Column -->
-                <ng-container matColumnDef="nameLesson">
+                <!-- lessonName Column -->
+                <ng-container matColumnDef="lessonName">
                     <th mat-header-cell *matHeaderCellDef> Name </th>
-                    <td mat-cell *matCellDef="let element"> {{element.nameLesson}} </td>
+                    <td mat-cell *matCellDef="let element"> {{element.lessonName}} </td>
                 </ng-container>
 
                 <!-- indexLesson Column -->
@@ -101,10 +101,10 @@
                     <td mat-cell *matCellDef="let element"> {{element.ID}} </td>
                 </ng-container>
 
-                <!-- nameStudent Column -->
-                <ng-container matColumnDef="nameStudent">
+                <!-- studentName Column -->
+                <ng-container matColumnDef="studentName">
                     <th mat-header-cell *matHeaderCellDef> Name </th>
-                    <td mat-cell *matCellDef="let element"> {{element.nameStudent}} </td>
+                    <td mat-cell *matCellDef="let element"> {{element.studentName}} </td>
                 </ng-container>
 
                 <!-- score Column -->
@@ -136,7 +136,7 @@
             <p class="text-lg font-semibold flex items-center">
                 <a class="flex h-full" routerLink="/analyze"><mat-icon
                         class="text-base">arrow_back_ios_new</mat-icon></a>
-                {{currentFile?.nameFile}}
+                {{currentFile?.fileName}}
             </p>
             <p class="ml-2"> Pick Your type Table: </p>
             <div class="flex items-center space-x-2 ml-2">

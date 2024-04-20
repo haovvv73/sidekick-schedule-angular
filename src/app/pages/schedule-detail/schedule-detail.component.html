@@ -1,0 +1,191 @@
+<app-window-no-tab-layout>
+    <div 
+        windowDisplay 
+        class="h-full p-2 bg-black/10 grid grid-rows-2 grid-cols-5 gap-2 overflow-auto relative"
+    >
+        <!-- todo list -->
+        <div class="rounded-lg bg-white border shadow-md col-span-2 row-span-2 overflow-hidden">
+            <div class="overflow-auto h-full w-full flex flex-col scroll-smooth" id="scrollableDiv">
+                <!-- header bar -->
+                <div class="p-3 sticky top-0 border-b bg-white shadow-md z-50 flex sm:items-center sm:flex-row flex-col" > 
+                    <div class="flex-1 space-x-1" >
+                        <span><i class="fa fa-tasks text-xl"></i></span>
+                        <span class="p-1 font-semibold text-xl" >Task</span> 
+                    </div>
+                    <div class="flex items-center space-x-2" >
+                        <button 
+                            (click)="onDeleteTodoItemClick(todo.selectedOptions.selected)"    
+                            class="rounded-xl hover:bg-red-200 px-2 space-x-2 mx-auto"
+                        > 
+                            <span>{{todo.selectedOptions.selected.length}} item</span>
+                            <i class="fa fa-trash text-red-500 text-lg"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- list task -->
+                <div class="flex-1" >
+                    <mat-selection-list role="list" [color]="'warn'" #todo>
+                        <mat-list-option *ngFor="let item of todos" role="listitem" class="border-b" [value]="item">
+                            <span>{{item}}</span>
+                        </mat-list-option>
+                    </mat-selection-list>
+                </div>
+
+                <div class="py-3 px-6 space-x-2 sticky bottom-0 border-b bg-white z-50 flex items-center" >
+                    <input [(ngModel)]="newTodo" type="text" class="w-full border flex-1 px-2 py-1 outline-none rounded-full border-gray-500">
+                    <button (click)="onAddTodoItemClick()" ><i class="fa fa-plus-circle text-2xl text-sky-500"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- info schedule -->
+        <div
+            *ngIf="currentCourse" 
+            class="rounded-lg bg-white border shadow-md col-start-3 col-end-6 row-start-1 row-end-3 p-3 overflow-auto flex flex-col"
+        >
+            <!-- part 1 -->
+            <div class="px-2" >
+                <!-- back button -->
+                <button [routerLink]="'/schedule'" >
+                    <i class="fa fa-angle-left text-xl"></i>
+                </button>
+            </div>
+            <div class="space-y-2 text-center" >
+                <div class="h-[100px] w-[100px] rounded-full bg-gradient-to-b from-blue-400 to-sky-400 mx-auto " > 
+                    <i class="fa fa-calendar-week text-[50px] mt-6"></i>
+                </div>
+                <h1 class="text-2xl font-semibold" >{{currentCourse.name}}</h1>
+            </div>
+
+            <!-- part 2 -->
+            <div class="border my-2"></div>
+            <div class="py-2 px-6 space-y-2">
+                <!-- address -->
+                <div class="sm:flex-row flex-col flex space-x-2 ">
+                    <span><i class="text-base mr-2 fa fa-map-marker-alt"></i> Address:</span>
+                    <span class="text-gray-500" >
+                        {{currentCourse.address}}
+                    </span>
+                </div>
+                <!-- room -->
+                <div class="sm:flex-row flex-col flex space-x-2 ">
+                    <span><i class="text-base mr-2 fa fa-store-alt"></i> Room:</span>
+                    <span class="text-gray-500" >
+                        {{currentCourse.room}}
+                    </span>
+                </div>
+                <!-- time -->
+                <div class="sm:flex-row flex-col flex space-x-2 ">
+                    <span><i class="text-base mr-2 fa fa-clock"></i> Start:</span>
+                    <span class="text-gray-500" >
+                        {{currentCourse.timeStart + ' - ' + currentCourse.timeEnd}}
+                    </span>
+                </div>
+            </div>
+
+            <!-- description -->
+            <div class="border my-2"></div>
+            <div 
+                class="p-2 mx-4 my-4 space-y-0 bg-gray-50 rounded-2xl border flex-1" 
+            >
+                <div>
+                    <span><i class="text-base mr-2 fa fa-info-circle text-sky-500"></i> </span>
+                    <span class="text-black">Description:</span>
+                </div>
+                <div class="p-2 w-full text-gray-600 bg-gray-50 rounded-lg" >
+                    <p>{{currentCourse.description}}</p>
+                </div>
+            </div>
+
+            <!-- button -->
+            <div class="flex space-x-2 items-center mt-3 ml-auto w-fit" >
+                <button mat-raised-button (click)="onOpenCourseFormClick()" > Edit </button>
+            </div>
+        </div>
+
+        <!-- courseForm -->
+        <div 
+            *ngIf="courseForm"  
+            class="absolute -top-3 bg-black/20  left-0 bottom-0 right-0 z-50 flex items-center justify-center" 
+        >
+            <div class="bg-white rounded-md h-fit sm:w-2/3 w-[95%] max-h-[500px] overflow-y-auto">
+                <div class="w-fit ml-auto mr-2 mt-2">
+                    <button (click)="onCloseCourseFormClick()"> <mat-icon color="warn">highlight_off</mat-icon>
+                    </button>
+                </div>
+                <form class="p-4 border-t space-y-2" [formGroup]="courseGroup" (ngSubmit)="onUpdateCourseClick()">
+                    <!-- name -->
+                    <mat-form-field class="w-full">
+                        <mat-label>Course Name</mat-label>
+                        <input matInput formControlName="name">
+                        <mat-error *ngIf="courseGroup.get('name')?.hasError('required')">
+                            Course Name is required</mat-error>
+                        <mat-error *ngIf="courseGroup.get('name')?.hasError('pattern')">
+                            Event name not contain special character</mat-error>
+                    </mat-form-field>
+
+                    <!-- time start - time end - day -->
+                    <div class="flex items-center gap-2" >
+                        <mat-form-field class="w-1/2">
+                            <mat-label>Time start</mat-label>
+                            <input matInput type="time" onfocus="this.showPicker()" formControlName="timeStart">
+                            <mat-icon matSuffix>access_time</mat-icon>
+                            <mat-error class="-ml-1" *ngIf="courseGroup.get('timeStart')?.hasError('required')">
+                                Time is required</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="w-1/2">
+                            <mat-label>Time end</mat-label>
+                            <input matInput type="time" onfocus="this.showPicker()" formControlName="timeEnd">
+                            <mat-icon matSuffix>access_time</mat-icon>
+                            <mat-error class="-ml-1" *ngIf="courseGroup.get('timeEnd')?.hasError('required')">
+                                Time is required</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="w-1/2">
+                            <mat-label>Day</mat-label>
+                            <mat-select matInput formControlName="day">
+                                <mat-option value="monday">Monday</mat-option>
+                                <mat-option value="tuesday">Tuesday</mat-option>
+                                <mat-option value="wednesday">Wednesday</mat-option>
+                                <mat-option value="thursday">Thursday</mat-option>
+                                <mat-option value="friday">Friday</mat-option>
+                                <mat-option value="saturday">Saturday</mat-option>
+                                <mat-option value="sunday">Sunday</mat-option>
+                            </mat-select>
+                            <!-- <mat-error *ngIf="courseGroup.get('day')?.hasError('required')">
+                                Day is required</mat-error> -->
+                        </mat-form-field>
+                    </div>
+
+                    <!-- address - room -->
+                    <div class="flex items-center gap-2" >
+                        <mat-form-field class="w-1/2">
+                            <mat-label>Address</mat-label>
+                            <input matInput formControlName="address">
+                            <mat-error *ngIf="courseGroup.get('address')?.hasError('required')">
+                                address is required</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field class="w-1/2">
+                            <mat-label>Room/location</mat-label>
+                            <input matInput formControlName="room">
+                            <mat-error *ngIf="courseGroup.get('room')?.hasError('required')">
+                                Room/location is required</mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <!-- description -->
+                    <mat-form-field class="w-full">
+                        <mat-label>Description</mat-label>
+                        <textarea matInput formControlName="description"></textarea>
+                    </mat-form-field>
+
+                    <button mat-raised-button color="primary" class="w-full">Update Course</button>
+                </form>
+            </div>
+        </div>
+        
+    </div>
+</app-window-no-tab-layout>

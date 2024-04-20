@@ -1,5 +1,5 @@
 export interface DataStudent{
     ID:string,
-    nameStudent:string,
+    studentName:string,
     score:number
 }

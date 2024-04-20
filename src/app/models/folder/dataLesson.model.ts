@@ -1,6 +1,6 @@
 export interface DataLesson{
     ID:string,
-    nameLesson:string,
+    lessonName:string,
     indexLesson:number,
     score:number
 }

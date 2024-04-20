@@ -42,9 +42,11 @@
             </div>
 
             <div class="flex items-center space-x-2" >
-                <button class="flex items-center" (click)="onAddFile()" > <mat-icon class="h-full">add</mat-icon> </button>
-                <button class="flex items-center" (click)="onEditFolder()"> <mat-icon class="h-full">edit</mat-icon> </button>
-                <button class="flex items-center" (click)="onDeleteFolder()"> <mat-icon class="h-full">delete</mat-icon> </button>
+                <div *ngIf="currentFolder !== 'All Folder'" class="flex items-center space-x-2">
+                    <button class="flex items-center" (click)="onAddFile()" > <mat-icon class="h-full">add</mat-icon> </button>
+                    <button class="flex items-center" (click)="onEditFolder()"> <mat-icon class="h-full">edit</mat-icon> </button>
+                    <button class="flex items-center" (click)="onDeleteFolder()"> <mat-icon class="h-full">delete</mat-icon> </button>
+                </div>
                 <div class="flex items-center border rounded-lg p-1 bg-white">
                     <mat-icon class="mr-2" >search</mat-icon>
                     <input type="text" class="outline-none" placeholder="Search" >

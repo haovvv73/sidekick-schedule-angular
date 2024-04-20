@@ -9,7 +9,6 @@ import { FileInterface, Folder } from 'src/app/models/folder/folder.model';
   styleUrls: ['./analyze.component.css']
 })
 export class AnalyzeComponent {
-
   currentFolder = ''
   currentFiles: FileInterface[] = []
 
